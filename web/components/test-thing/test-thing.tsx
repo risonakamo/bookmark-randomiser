@@ -9,5 +9,7 @@ interface TestThingProps
 
 export default function TestThing(props:TestThingProps):JSX.Element
 {
-  return <div>bruh225555</div>;
+  return <div className="test-thing">
+    bruh225555
+  </div>;
 }
