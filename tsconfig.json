@@ -1,0 +1,39 @@
+{
+    "compilerOptions":{
+        // ts compiler settings
+        "strict":true,
+        "jsx":"react-jsx",
+        "noEmit":true,
+
+        // lib settings
+        "lib":["dom","ESNext"],
+        "target":"ESNext",
+
+        // module/import settings
+        "esModuleInterop":false,
+        "moduleResolution":"node",
+        "module":"ESNext",
+        "resolveJsonModule":true,
+        "isolatedModules":true,
+        "allowSyntheticDefaultImports": true,
+
+        // pathing
+        "baseUrl":".",
+        "paths":{
+            "components/*":["web/components/*"],
+            "apis/*":["web/apis/*"],
+            "hooks/*":["web/hooks/*"],
+            "lib/*":["web/lib/*"]
+        }
+    },
+
+    "include":[
+        "**/*.d.ts",
+        "web/**/*.ts",
+        "web/**/*.tsx"
+    ],
+
+    "exclude":[
+        "node_modules"
+    ]
+}
