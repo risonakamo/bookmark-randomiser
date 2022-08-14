@@ -1,6 +1,8 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
 
+import TestThing from "components/test-thing/test-thing";
+
 import "./index.less";
 
 function IndexMain():JSX.Element
@@ -11,15 +13,14 @@ function IndexMain():JSX.Element
     <div className="thing">
       asdasd
     </div>
+
+    <TestThing/>
   </>;
 }
 
 function main()
 {
   createRoot(document.querySelector(".main")!).render(<IndexMain/>);
-  setTimeout(()=>{
-    throw "adad";
-  },1000);
 }
 
 window.onload=main;
