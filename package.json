@@ -2,8 +2,7 @@
   "name": "bookmark-randomiser",
   "version": "0.0.0",
   "scripts": {
-    "watch": "vite",
-    "build": "tsc && vite build"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/react": "^18.0.17",

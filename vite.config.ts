@@ -28,6 +28,11 @@ export default defineConfig({
     },
 
     build:{
-        outDir:"build"
+        outDir:"build",
+        rollupOptions:{
+            input:{
+                "folder-select":`${__dirname}/pages/folder-select/index.html`
+            }
+        }
     }
 });
