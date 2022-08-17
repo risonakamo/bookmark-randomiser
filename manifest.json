@@ -1,0 +1,11 @@
+{
+    "name":"Bookmark Randomiser",
+    "description":"Randomise bookmarks in folders",
+    "version":"1.0.0",
+    "manifest_version":3,
+
+    "action":{
+        "default_title":"Bookmark Randomiser",
+        "default_popup":"build/pages/popup/index.html"
+    }
+}

@@ -5,6 +5,8 @@ import checker from "vite-plugin-checker";
 declare const __dirname:string;
 
 export default defineConfig({
+    base:"/build/",
+
     plugins:[
         react(),
         checker({
@@ -29,9 +31,13 @@ export default defineConfig({
 
     build:{
         outDir:"build",
+        watch:{
+            buildDelay:1500
+        },
         rollupOptions:{
             input:{
-                "folder-select":`${__dirname}/pages/folder-select/index.html`
+                "folder-select":`${__dirname}/pages/folder-select/index.html`,
+                "popup":`${__dirname}/pages/popup/index.html`,
             }
         }
     }
