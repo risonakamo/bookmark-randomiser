@@ -6,6 +6,7 @@ declare const __dirname:string;
 
 export default defineConfig({
     base:"/build/",
+    mode:"development",
 
     plugins:[
         react(),
@@ -13,6 +14,23 @@ export default defineConfig({
             typescript:true
         })
     ],
+
+    build:{
+        outDir:"build",
+        target:"esnext",
+        sourcemap:true,
+
+        watch:{
+            buildDelay:1500
+        },
+
+        rollupOptions:{
+            input:{
+                "folder-select":`${__dirname}/pages/folder-select/index.html`,
+                "popup":`${__dirname}/pages/popup/index.html`,
+            }
+        }
+    },
 
     resolve:{
         alias:{
@@ -27,18 +45,5 @@ export default defineConfig({
     server:{
         port:4000,
         hmr:false
-    },
-
-    build:{
-        outDir:"build",
-        watch:{
-            buildDelay:1500
-        },
-        rollupOptions:{
-            input:{
-                "folder-select":`${__dirname}/pages/folder-select/index.html`,
-                "popup":`${__dirname}/pages/popup/index.html`,
-            }
-        }
     }
 });

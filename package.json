@@ -2,9 +2,11 @@
   "name": "bookmark-randomiser",
   "version": "0.0.0",
   "scripts": {
-    "build": "vite build"
+    "watch":"vite build",
+    "build": "vite build -w false"
   },
   "dependencies": {
+    "@types/chrome": "^0.0.193",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
