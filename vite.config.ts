@@ -7,6 +7,7 @@ declare const __dirname:string;
 export default defineConfig({
     base:"/build/",
     mode:"development",
+    publicDir:"web/assets",
 
     plugins:[
         react(),
@@ -19,6 +20,7 @@ export default defineConfig({
         outDir:"build",
         target:"esnext",
         sourcemap:true,
+        minify:false,
 
         watch:{
             buildDelay:1500

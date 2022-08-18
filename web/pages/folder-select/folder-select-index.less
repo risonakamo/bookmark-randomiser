@@ -1,0 +1,64 @@
+@import (reference) "css/theme";
+
+html,body,.main
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    flex-direction: row;
+}
+
+body
+{
+    background-color: @background-main;
+    color: @text-foreground;
+    font-family: @main-font;
+}
+
+.main
+{
+    .back-button
+    {
+        width: 90px;
+        border-right: 1px solid @text-foreground;
+        opacity: .5;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover
+        {
+            opacity: 1;
+        }
+
+        img
+        {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .folder-zone
+    {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .title-zone
+        {
+            height: 70px;
+        }
+
+        .toast-zone
+        {
+            height: 40px;
+        }
+
+        .item-zone
+        {
+            flex: 1;
+        }
+    }
+}

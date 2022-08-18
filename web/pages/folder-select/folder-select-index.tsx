@@ -1,12 +1,26 @@
-import React from "react";
 import {createRoot} from "react-dom/client";
+
+import ToastBar from "components/toast-bar/toast-bar";
 
 import "./folder-select-index.less";
 
 function FolderSelectMain():JSX.Element
 {
   return <>
-    folderselect
+    <div className="back-button">
+      <img src="/build/imgs/big-back-button.png"/>
+    </div>
+    <div className="folder-zone">
+      <div className="title-zone">
+
+      </div>
+      <div className="toast-zone">
+        <ToastBar/>
+      </div>
+      <div className="item-zone">
+
+      </div>
+    </div>
   </>;
 }
 
