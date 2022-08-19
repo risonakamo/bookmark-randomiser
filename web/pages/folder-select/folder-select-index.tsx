@@ -1,6 +1,7 @@
 import {createRoot} from "react-dom/client";
 
 import ToastBar from "components/toast-bar/toast-bar";
+import FolderItem from "components/folder-item/folder-item";
 
 import "./folder-select-index.less";
 
@@ -18,7 +19,7 @@ function FolderSelectMain():JSX.Element
         <ToastBar/>
       </div>
       <div className="item-zone">
-
+        <FolderItem/>
       </div>
     </div>
   </>;

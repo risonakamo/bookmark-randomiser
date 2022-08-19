@@ -1,0 +1,76 @@
+@import (reference) "css/theme";
+
+.folder-item
+{
+    --foreground: @text-foreground;
+
+    display: flex;
+    width: 200px;
+    height: 60px;
+    border: 2px solid transparent;
+    padding: 7px 3px 4px 3px;
+    cursor: pointer;
+    color: var(--foreground);
+
+    &:hover
+    {
+        border-color: var(--foreground);
+    }
+
+    &.recent
+    {
+        --foreground: @recent-foreground;
+
+        .icon-zone .folder-icon
+        {
+            background-image: url("/build/imgs/folder-recent.png");
+        }
+
+        .label h2
+        {
+            font-style: italic;
+        }
+    }
+
+    .icon-zone
+    {
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .folder-icon
+        {
+            width: 30px;
+            height: 30px;
+            background-image: url("/build/imgs/folder-normal.png");
+        }
+    }
+
+    .label
+    {
+        flex: 1;
+        flex-direction: column;
+
+        h2
+        {
+            font-size: 18px;
+            margin: 0;
+            letter-spacing: 1px;
+            font-weight: 400;
+            overflow: hidden;
+            line-height: 1.1;
+            word-break: break-all;
+            max-height: 40px;
+        }
+
+        p
+        {
+            font-size: 12px;
+            margin: 0;
+            height: 20px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
