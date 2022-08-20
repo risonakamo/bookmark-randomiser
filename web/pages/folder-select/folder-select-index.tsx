@@ -13,13 +13,17 @@ function FolderSelectMain():JSX.Element
     </div>
     <div className="folder-zone">
       <div className="title-zone">
-
+        <h1>FOLDER SELECT</h1>
       </div>
       <div className="toast-zone">
         <ToastBar/>
       </div>
       <div className="item-zone">
-        {/* <FolderItem/> */}
+        <FolderItem name="folder 1" items={120}/>
+        <FolderItem name="folder 2" items={12}/>
+        <FolderItem name="folder that has really long name that has to be longer than this" items={2}/>
+        <FolderItem name="recent folder" items={12} mode="recent"/>
+        <FolderItem name="disabled folder" items={0} mode="disabled"/>
       </div>
     </div>
   </>;
