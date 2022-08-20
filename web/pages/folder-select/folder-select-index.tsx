@@ -19,7 +19,7 @@ function FolderSelectMain():JSX.Element
         <ToastBar/>
       </div>
       <div className="item-zone">
-        <FolderItem/>
+        {/* <FolderItem/> */}
       </div>
     </div>
   </>;

@@ -4,33 +4,14 @@
 {
     --foreground: @text-foreground;
 
-    display: flex;
+    display: inline-flex;
     width: 200px;
     height: 60px;
     border: 2px solid transparent;
     padding: 7px 3px 4px 3px;
     cursor: pointer;
     color: var(--foreground);
-
-    &:hover
-    {
-        border-color: var(--foreground);
-    }
-
-    &.recent
-    {
-        --foreground: @recent-foreground;
-
-        .icon-zone .folder-icon
-        {
-            background-image: url("/build/imgs/folder-recent.png");
-        }
-
-        .label h2
-        {
-            font-style: italic;
-        }
-    }
+    margin: 3px;
 
     .icon-zone
     {
@@ -51,6 +32,8 @@
     {
         flex: 1;
         flex-direction: column;
+        display: flex;
+        justify-content: center;
 
         h2
         {
@@ -72,5 +55,51 @@
             display: flex;
             align-items: center;
         }
+    }
+
+    &.recent
+    {
+        --foreground: @recent-foreground;
+
+        .icon-zone .folder-icon
+        {
+            background-image: url("/build/imgs/folder-recent2.png");
+        }
+
+        .label h2
+        {
+            font-style: italic;
+        }
+    }
+
+    &.disabled
+    {
+        .icon-zone .folder-icon
+        {
+            background-image: url("/build/imgs/folder-empty2.png");
+        }
+
+        .label p
+        {
+            color: @disabled-foreground;
+        }
+    }
+
+    &.normal
+    {
+        .icon-zone:hover .folder-icon
+        {
+            background-image: url("/build/imgs/folder-shuffle2.png");
+        }
+    }
+
+    &:hover
+    {
+        border-color: var(--foreground);
+    }
+
+    &:active
+    {
+        transform: translateY(2px);
     }
 }

@@ -23,13 +23,14 @@ export default defineConfig({
         minify:false,
 
         watch:{
-            buildDelay:1500
+            buildDelay:1000
         },
 
         rollupOptions:{
             input:{
                 "folder-select":`${__dirname}/pages/folder-select/index.html`,
                 "popup":`${__dirname}/pages/popup/index.html`,
+                "component-test":`${__dirname}/pages/component-test/index.html`,
             }
         }
     },
