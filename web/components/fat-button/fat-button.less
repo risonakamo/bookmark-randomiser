@@ -1,0 +1,39 @@
+@import (reference) "css/theme";
+@import (reference) "css/shared";
+
+.fat-button
+{
+    width: 275px;
+    height: 90px;
+    border: 2px solid @text-foreground;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.8;
+    cursor: pointer;
+
+    h2
+    {
+        margin: 0;
+        font-weight: 400;
+        font-size: 28px;
+        letter-spacing: 4px;
+    }
+
+    &.disabled
+    {
+        cursor: default;
+        opacity: .5;
+    }
+
+    &.normal
+    {
+        .click-animation();
+
+        &:hover
+        {
+            opacity: 1;
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import {createRoot} from "react-dom/client";
 
 import FolderItem from "components/folder-item/folder-item";
+import FatButton from "components/fat-button/fat-button";
 
 import "./component-test-index.less";
 
@@ -14,6 +15,12 @@ export default function ComponentTestIndex():JSX.Element
       <FolderItem name="folder that has really long name that has to be longer than this" items={2}/>
       <FolderItem name="recent folder" items={12} mode="recent"/>
       <FolderItem name="disabled folder" items={0} mode="disabled"/>
+    </div>
+
+    <h1>big button</h1>
+    <div>
+      <FatButton text="GENERATE"/>
+      <FatButton mode="disabled" text="NO ITEMS"/>
     </div>
   </>;
 }

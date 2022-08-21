@@ -1,8 +1,10 @@
 @import (reference) "css/theme";
+@import (reference) "css/shared";
 
 .folder-item
 {
     --foreground: @text-foreground;
+    .click-animation();
 
     display: inline-flex;
     width: 200px;
@@ -96,10 +98,5 @@
     &:hover
     {
         border-color: var(--foreground);
-    }
-
-    &:active
-    {
-        transform: translateY(2px);
     }
 }
