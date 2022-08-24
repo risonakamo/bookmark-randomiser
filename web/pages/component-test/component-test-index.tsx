@@ -2,6 +2,7 @@ import {createRoot} from "react-dom/client";
 
 import FolderItem from "components/folder-item/folder-item";
 import FatButton from "components/fat-button/fat-button";
+import FolderBackButton from "components/folder-back-button/folder-back-button";
 
 import "./component-test-index.less";
 
@@ -23,6 +24,11 @@ export default function ComponentTestIndex():JSX.Element
       <FatButton text="OPEN"/>
       <FatButton mode="disabled" text="NO ITEMS"/>
       <FatButton mode="opened" text="OPENED" hoverText="OPEN AGAIN" hoverMode="open-again"/>
+    </div>
+
+    <h1>folder back button</h1>
+    <div>
+      <FolderBackButton/>
     </div>
   </>;
 }
