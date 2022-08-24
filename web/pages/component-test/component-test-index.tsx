@@ -18,9 +18,11 @@ export default function ComponentTestIndex():JSX.Element
     </div>
 
     <h1>big button</h1>
-    <div>
+    <div className="big-buttons">
       <FatButton text="GENERATE"/>
+      <FatButton text="OPEN"/>
       <FatButton mode="disabled" text="NO ITEMS"/>
+      <FatButton mode="opened" text="OPENED" hoverText="OPEN AGAIN" hoverMode="open-again"/>
     </div>
   </>;
 }

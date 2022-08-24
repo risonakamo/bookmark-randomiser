@@ -3,15 +3,24 @@
 
 .fat-button
 {
+    --main-colour: @text-foreground;
+
     width: 275px;
     height: 90px;
-    border: 2px solid @text-foreground;
+    border: 2px solid var(--main-colour);
     box-sizing: border-box;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     opacity: 0.8;
     cursor: pointer;
+    user-select: none;
+
+    .check-icon
+    {
+        display: none;
+        margin-right: 8px;
+    }
 
     h2
     {
@@ -19,6 +28,7 @@
         font-weight: 400;
         font-size: 28px;
         letter-spacing: 4px;
+        color: var(--main-colour);
     }
 
     &.disabled
@@ -29,11 +39,31 @@
 
     &.normal
     {
+
+    }
+
+    &.opened
+    {
+        --main-colour: @opened-foreground;
+
+        .check-icon
+        {
+            display: block;
+        }
+    }
+
+    &.enabled
+    {
         .click-animation();
 
         &:hover
         {
             opacity: 1;
         }
+    }
+
+    &.open-again
+    {
+        --main-colour: @open-again-green;
     }
 }
