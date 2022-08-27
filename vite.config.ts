@@ -31,6 +31,7 @@ export default defineConfig({
                 "folder-select":`${__dirname}/pages/folder-select/index.html`,
                 "popup":`${__dirname}/pages/popup/index.html`,
                 "component-test":`${__dirname}/pages/component-test/index.html`,
+                "bookmark-generate":`${__dirname}/pages/bookmark-generate/index.html`,
             }
         }
     },
