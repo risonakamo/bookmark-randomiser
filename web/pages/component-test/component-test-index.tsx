@@ -3,11 +3,18 @@ import {createRoot} from "react-dom/client";
 import FolderItem from "components/folder-item/folder-item";
 import FatButton from "components/fat-button/fat-button";
 import FolderBackButton from "components/folder-back-button/folder-back-button";
+import StaticToastBar from "components/static-toast-bar/static-toast-bar";
 
 import "./component-test-index.less";
 
 export default function ComponentTestIndex():JSX.Element
 {
+  const path1:string[]=[
+    "folder1",
+    "folder2",
+    "folder3"
+  ];
+
   return <>
     <h1>folder items</h1>
     <div className="folder-items">
@@ -29,6 +36,11 @@ export default function ComponentTestIndex():JSX.Element
     <h1>folder back button</h1>
     <div>
       <FolderBackButton/>
+    </div>
+
+    <h1>static toast bar</h1>
+    <div>
+      <StaticToastBar path={path1}/>
     </div>
   </>;
 }
