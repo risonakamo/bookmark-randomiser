@@ -1,3 +1,4 @@
+import {useMemo} from "react";
 import _ from "lodash";
 
 import "./static-toast-bar.less";
@@ -9,10 +10,14 @@ interface StaticToastBarProps
 
 export default function StaticToastBar(props:StaticToastBarProps):JSX.Element
 {
+  const convertedPath:string[]=useMemo(()=>{
+    return addPathSlashes(props.path);
+  },[props.path]);
+
   /** render the path items */
   function r_pathItems():JSX.Element[]
   {
-    return _.map(addPathSlashes(props.path),(pathitem:string,i:number):JSX.Element=>{
+    return _.map(convertedPath,(pathitem:string,i:number):JSX.Element=>{
       return <p key={i}>{pathitem}</p>;
     });
   }
