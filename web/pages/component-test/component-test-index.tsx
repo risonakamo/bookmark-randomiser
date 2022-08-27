@@ -4,6 +4,7 @@ import FolderItem from "components/folder-item/folder-item";
 import FatButton from "components/fat-button/fat-button";
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
+import AmountSelector from "components/amount-selector/amount-selector";
 
 import "./component-test-index.less";
 
@@ -41,6 +42,11 @@ export default function ComponentTestIndex():JSX.Element
     <h1>static toast bar</h1>
     <div>
       <StaticToastBar path={path1}/>
+    </div>
+
+    <h1>amount selector</h1>
+    <div>
+      <AmountSelector/>
     </div>
   </>;
 }
