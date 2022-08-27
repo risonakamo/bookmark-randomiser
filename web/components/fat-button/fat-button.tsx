@@ -3,7 +3,7 @@ import cx,{Mapping} from "classnames";
 
 import "./fat-button.less";
 
-type ButtonMode="normal"|"disabled"|"opened"|"open-again"
+export type ButtonMode="normal"|"disabled"|"opened"|"open-again"
 
 interface FatButtonProps
 {
@@ -12,6 +12,8 @@ interface FatButtonProps
 
   hoverText?:string
   hoverMode?:ButtonMode
+
+  className?:string
 }
 
 export default function FatButton(props:FatButtonProps):JSX.Element
@@ -64,7 +66,9 @@ export default function FatButton(props:FatButtonProps):JSX.Element
   }
 
 
-  return <div className={cx("fat-button",topCx)} onMouseEnter={h_hover} onMouseLeave={h_unhover}>
+  return <div className={cx("fat-button",topCx,props.className)} onMouseEnter={h_hover}
+    onMouseLeave={h_unhover}
+  >
     <img src="/build/imgs/opened-check.png" className="check-icon"/>
     <h2>{text}</h2>
   </div>;

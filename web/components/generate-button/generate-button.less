@@ -1,0 +1,27 @@
+@import (reference) "css/theme";
+
+.generate-button
+{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    .fat-button.inner-button
+    {
+        margin-bottom: 5px;
+    }
+
+    .items-count
+    {
+        margin: 0;
+        font-size: 13px;
+
+        .item-number
+        {
+            &.disabled
+            {
+                color: @disabled-foreground;
+            }
+        }
+    }
+}

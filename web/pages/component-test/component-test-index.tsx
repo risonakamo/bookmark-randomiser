@@ -5,6 +5,7 @@ import FatButton from "components/fat-button/fat-button";
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
 import AmountSelector from "components/amount-selector/amount-selector";
+import GenerateButton from "components/generate-button/generate-button";
 
 import "./component-test-index.less";
 
@@ -28,9 +29,9 @@ export default function ComponentTestIndex():JSX.Element
 
     <h1>big button</h1>
     <div className="big-buttons">
-      <FatButton text="GENERATE"/>
+      <GenerateButton itemCount={52}/>
+      <GenerateButton itemCount={0}/>
       <FatButton text="OPEN"/>
-      <FatButton mode="disabled" text="NO ITEMS"/>
       <FatButton mode="opened" text="OPENED" hoverText="OPEN AGAIN" hoverMode="open-again"/>
     </div>
 
