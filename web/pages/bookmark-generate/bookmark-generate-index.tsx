@@ -29,6 +29,9 @@ export default function BookmarkGenerateIndex():JSX.Element
     </div>
     <div className="items-zone">
       <BookmarkItem/>
+      <BookmarkItem starred={true}/>
+      <BookmarkItem opened={true}/>
+      <BookmarkItem opened={true} starred={true}/>
     </div>
   </>;
 }

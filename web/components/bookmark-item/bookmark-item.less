@@ -1,31 +1,84 @@
+@import (reference) "css/theme";
+@import (reference) "css/shared";
+
 .bookmark-item
 {
+    height: 35px;
     display: inline-flex;
     align-items: center;
+    margin: 20px;
+    padding: 5px 10px;
 
     & > div
     {
-        display: inline-block;
+        display: inline-flex;
+        height: 100%;
     }
 
     .gen-number
     {
         width: 30px;
+        align-items: center;
     }
 
     .star-zone
     {
+        .click-animation();
+
         width: 30px;
+        align-items: center;
+        opacity: 0;
+        user-select: none;
+        cursor: pointer;
+
+        img
+        {
+            width: 11px;
+            height: 11px;
+        }
+
+        &.starred
+        {
+            opacity: 1;
+
+            &:hover
+            {
+                opacity: .5;
+            }
+        }
+
+        &:hover
+        {
+            opacity: .8;
+        }
     }
 
     .icon-zone
     {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        align-items: center;
+
+        img
+        {
+            width: 28px;
+            height: 28px;
+        }
     }
 
     .title-zone
     {
         font-size: 12px;
+        width: 180px;
+        overflow: hidden;
+    }
+
+    &.opened
+    {
+        opacity: .5;
+
+        &:hover
+        {
+            opacity: .8;
+        }
     }
 }
