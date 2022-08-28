@@ -5,6 +5,7 @@ import StaticToastBar from "components/static-toast-bar/static-toast-bar";
 import AmountSelector from "components/amount-selector/amount-selector";
 import GenerateButton from "components/generate-button/generate-button";
 import FatButton from "components/fat-button/fat-button";
+import BookmarkItem from "components/bookmark-item/bookmark-item";
 
 import "./bookmark-generate-index.less";
 
@@ -27,7 +28,7 @@ export default function BookmarkGenerateIndex():JSX.Element
       <FatButton text="OPEN"/>
     </div>
     <div className="items-zone">
-
+      <BookmarkItem/>
     </div>
   </>;
 }
