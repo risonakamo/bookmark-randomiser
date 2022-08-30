@@ -53,23 +53,43 @@
         }
     }
 
-    .icon-zone
+    .link-zone
     {
-        width: 40px;
-        align-items: center;
+        .click-animation();
 
-        img
+        border: 2px solid transparent;
+        padding: 0 8px;
+        cursor: pointer;
+
+        & > div
         {
-            width: 28px;
-            height: 28px;
+            display: inline-flex;
+            height: 100%;
         }
-    }
 
-    .title-zone
-    {
-        font-size: 12px;
-        width: 180px;
-        overflow: hidden;
+        .icon-zone
+        {
+            width: 40px;
+            align-items: center;
+
+            img
+            {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        .title-zone
+        {
+            font-size: 12px;
+            width: 180px;
+            overflow: hidden;
+        }
+
+        &:hover
+        {
+            border-color: @text-foreground;
+        }
     }
 
     &.opened

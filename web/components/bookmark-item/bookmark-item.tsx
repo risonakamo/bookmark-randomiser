@@ -30,11 +30,13 @@ export default function BookmarkItem(props:BookmarkItemProps):JSX.Element
     <div className={cx("star-zone",starZoneCx)}>
       <img src="/build/imgs/bookmark-star.png"/>
     </div>
-    <div className="icon-zone">
-      <img src={url}/>
-    </div>
-    <div className="title-zone">
-      アズールレーン公式 on Twitter: "【艦船紹介】 空母　リトル・イラストリアス 「愛と平和をこの海に、聖なる光をあなたに――ですね！指揮官さま♪」 中国配信版こどもの日記念艦船、 次回
+    <div className="link-zone">
+      <div className="icon-zone">
+        <img src={url}/>
+      </div>
+      <div className="title-zone" title={`アズールレーン公式 on Twitter: "【艦船紹介】 空母　リトル・イラストリアス 「愛と平和をこの海に、聖なる光をあなたに――ですね！指揮官さま♪」 中国配信版こどもの日記念艦船、 次回`}>
+        アズールレーン公式 on Twitter: "【艦船紹介】 空母　リトル・イラストリアス 「愛と平和をこの海に、聖なる光をあなたに――ですね！指揮官さま♪」 中国配信版こどもの日記念艦船、 次回
+      </div>
     </div>
   </div>;
 }
