@@ -1,5 +1,7 @@
 import {createRoot} from "react-dom/client";
 
+import {bookmarklibtest} from "lib/bookmark";
+
 import ToastBar from "components/toast-bar/toast-bar";
 import FolderItem from "components/folder-item/folder-item";
 
@@ -32,6 +34,7 @@ function FolderSelectMain():JSX.Element
 function main()
 {
   createRoot(document.querySelector(".main")!).render(<FolderSelectMain/>);
+  bookmarklibtest();
 }
 
 window.onload=main;
