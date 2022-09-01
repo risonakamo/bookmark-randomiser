@@ -2,17 +2,33 @@ import cx,{Mapping} from "classnames";
 
 import "./folder-item.less";
 
-type FolderMode="normal"|"recent"|"disabled"
+export type FolderMode="normal"|"recent"|"disabled"
 
 interface FolderItemProps
 {
   name:string
+  id:string
   items:number
   mode?:FolderMode
+
+  onClick?(title:string):void
+  onIconClick?(id:string):void
 }
 
 export default function FolderItem(props:FolderItemProps):JSX.Element
 {
+  /** folder item label clicked. return the title of the folder */
+  function h_click():void
+  {
+    props.onClick?.(props.name);
+  }
+
+  /** icon zone was clicked. return the id of the folder */
+  function h_iconClick():void
+  {
+    props.onIconClick?.(props.id);
+  }
+
   // determine top class
   const foldermode:FolderMode=props.mode || "normal";
 
@@ -30,10 +46,10 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
   }
 
   return <div className={cx("folder-item",topCx)}>
-    <div className="icon-zone" title={iconZoneTooltip}>
+    <div className="icon-zone" title={iconZoneTooltip} onClick={h_iconClick}>
       <div className="folder-icon"></div>
     </div>
-    <div className="label">
+    <div className="label" onClick={h_click}>
       <h2 title={props.name}>{props.name}</h2>
       <p>{props.items} items</p>
     </div>

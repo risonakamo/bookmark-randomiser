@@ -20,11 +20,12 @@ export default function ComponentTestIndex():JSX.Element
   return <>
     <h1>folder items</h1>
     <div className="folder-items">
-      <FolderItem name="folder 1" items={120}/>
-      <FolderItem name="folder 2" items={12}/>
-      <FolderItem name="folder that has really long name that has to be longer than this" items={2}/>
-      <FolderItem name="recent folder" items={12} mode="recent"/>
-      <FolderItem name="disabled folder" items={0} mode="disabled"/>
+      <FolderItem name="folder 1" items={120} id={"a"}/>
+      <FolderItem name="folder 2" items={12} id={"a"}/>
+      <FolderItem name="folder that has really long name that has to be longer than this"
+        items={2} id={"a"}/>
+      <FolderItem name="recent folder" items={12} mode="recent" id={"a"}/>
+      <FolderItem name="disabled folder" items={0} mode="disabled" id={"a"}/>
     </div>
 
     <h1>big button</h1>

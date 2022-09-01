@@ -12,6 +12,12 @@ import _ from "lodash";
          return null;
      }
 
+     if (!bookmarknode.children)
+     {
+        console.warn("target node had no children");
+        return [];
+     }
+
      return _(bookmarknode.children)
      .filter((childNode:BookmarkTreeNode):boolean=>{
          return "children" in childNode;
