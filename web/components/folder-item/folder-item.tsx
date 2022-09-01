@@ -8,6 +8,7 @@ interface FolderItemProps
 {
   name:string
   id:string
+  dirs:number
   items:number
   mode?:FolderMode
 
@@ -51,7 +52,7 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
     </div>
     <div className="label" onClick={h_click}>
       <h2 title={props.name}>{props.name}</h2>
-      <p>{props.items} items</p>
+      <p>{props.dirs} dirs, {props.items} items</p>
     </div>
   </div>;
 }

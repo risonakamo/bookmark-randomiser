@@ -51,7 +51,7 @@ function FolderSelectMain():JSX.Element
       }
 
       return <FolderItem name={item.title} items={item.items} mode={mode} id={item.id} key={item.id}
-        onClick={h_folderItemClicked}/>
+        onClick={h_folderItemClicked} dirs={item.dirs}/>
     });
   }
 

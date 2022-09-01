@@ -117,7 +117,7 @@ async function getOtherBookmarksNode():Promise<BookmarkTreeNode|undefined>
 function countRealBookmarks(bookmarkNodes:BookmarkTreeNode[]):number
 {
     return _.reduce(bookmarkNodes,(r:number,node:BookmarkTreeNode):number=>{
-        if ("children" in node)
+        if (!("children" in node))
         {
             return r+1;
         }
@@ -135,10 +135,14 @@ function bookmarkNodeToItem(node:BookmarkTreeNode):BookmarkItem
         throw "bookmark node to item error";
     }
 
+    const realbookmarks:number=countRealBookmarks(node.children);
+    const dirs:number=node.children.length-realbookmarks;
+
     return {
         title:node.title,
         id:node.id,
-        items:countRealBookmarks(node.children)
+        items:realbookmarks,
+        dirs
     };
 }
 

@@ -5,5 +5,10 @@ interface BookmarkItem
 {
     title:string
     id:string
+
+    // number of folders in the bookmark item
+    dirs:number
+
+    // number of real bookmarks in this bookmark item
     items:number
 }
