@@ -1,5 +1,25 @@
 import _ from "lodash";
 
+/** given a path, get all the bookmark items that are in that path. bookmark items include all folders
+ *  immediately under the target path */
+ export async function getChildItems(path:BookmarkPath):Promise<BookmarkItem[]|null>
+ {
+     const bookmarknode:BookmarkTreeNode|null=await getBookmarkNodeWithPath(path);
+
+     if (!bookmarknode)
+     {
+         console.error("failed to convert bookmark node to path");
+         return null;
+     }
+
+     return _(bookmarknode.children)
+     .filter((childNode:BookmarkTreeNode):boolean=>{
+         return "children" in childNode;
+     })
+     .map(bookmarkNodeToItem)
+     .value();
+ }
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {
@@ -119,6 +139,8 @@ function bookmarkNodeToItem(node:BookmarkTreeNode):BookmarkItem
 export async function bookmarklibtest():Promise<void>
 {
     const a=await getBookmarkItemWithPath(["kantai/images"]);
+    const b=await getChildItems([]);
 
     console.log(a);
+    console.log(b);
 }
