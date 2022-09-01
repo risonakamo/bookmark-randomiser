@@ -46,13 +46,29 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
     iconZoneTooltip="No Items to Randomise";
   }
 
+  // determine various labels classes
+  const dirsCx:Mapping={
+    disabled:!props.dirs
+  };
+
+  const itemCountLabelCx:Mapping={
+    disabled:!props.items
+  };
+
+  const folderTitleCx:Mapping={
+    disabled:!props.dirs
+  };
+
   return <div className={cx("folder-item",topCx)}>
     <div className="icon-zone" title={iconZoneTooltip} onClick={h_iconClick}>
       <div className="folder-icon"></div>
     </div>
     <div className="label" onClick={h_click}>
-      <h2 title={props.name}>{props.name}</h2>
-      <p>{props.dirs} dirs, {props.items} items</p>
+      <h2 title={props.name} className={cx(folderTitleCx)}>{props.name}</h2>
+      <p>
+        <span className={cx(dirsCx)}>{props.dirs} dirs,</span>
+        &nbsp;<span className={cx(itemCountLabelCx)}>{props.items} items</span>
+      </p>
     </div>
   </div>;
 }

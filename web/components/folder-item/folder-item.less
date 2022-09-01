@@ -58,6 +58,11 @@
             display: flex;
             align-items: center;
         }
+
+        .disabled
+        {
+            color: @disabled-foreground;
+        }
     }
 
     &.recent
@@ -80,11 +85,6 @@
         .icon-zone .folder-icon
         {
             background-image: url("/build/imgs/folder-empty2.png");
-        }
-
-        .label p
-        {
-            color: @disabled-foreground;
         }
     }
 

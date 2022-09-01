@@ -1,11 +1,16 @@
+@import (reference) "css/shared";
+
 .toast-item
 {
+    .click-animation();
+
     display: inline-block;
     margin: 0;
     padding: 5px 10px;
     letter-spacing: 2px;
     font-size: 17px;
     cursor: pointer;
+    user-select: none;
 
     &:hover
     {
