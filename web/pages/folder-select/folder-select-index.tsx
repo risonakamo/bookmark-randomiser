@@ -44,14 +44,7 @@ function FolderSelectMain():JSX.Element
   function render_folderItems():JSX.Element[]
   {
     return _.map(bookmarkItems,(item:BookmarkItem):JSX.Element=>{
-      var mode:FolderMode="normal";
-      if (!item.items)
-      {
-        mode="disabled";
-      }
-
-      return <FolderItem name={item.title} items={item.items} mode={mode} id={item.id} key={item.id}
-        onClick={h_folderItemClicked} dirs={item.dirs}/>
+      return <FolderItem item={item} key={item.id} onClick={h_folderItemClicked}/>
     });
   }
 

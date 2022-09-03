@@ -6,11 +6,7 @@ export type FolderMode="normal"|"recent"|"disabled"
 
 interface FolderItemProps
 {
-  name:string
-  id:string
-  dirs:number
-  items:number
-  mode?:FolderMode
+  item:BookmarkItem
 
   onClick?(title:string):void
   onIconClick?(id:string):void
@@ -18,24 +14,44 @@ interface FolderItemProps
 
 export default function FolderItem(props:FolderItemProps):JSX.Element
 {
-  /** folder item label clicked. return the title of the folder */
+  // HANDLERS
+  /** folder item label clicked. return the title of the folder. does nothing if the item has no
+   * dirs */
   function h_click():void
   {
-    props.onClick?.(props.name);
+    if (!props.item.dirs)
+    {
+      return;
+    }
+
+    props.onClick?.(props.item.title);
   }
 
-  /** icon zone was clicked. return the id of the folder */
+  /** icon zone was clicked. return the id of the folder. does nothing if the bookmark item has no
+   * items */
   function h_iconClick():void
   {
-    props.onIconClick?.(props.id);
+    if (!props.item.items)
+    {
+      return;
+    }
+
+    props.onIconClick?.(props.item.id);
   }
 
+
+  // RENDER
   // determine top class
-  const foldermode:FolderMode=props.mode || "normal";
+  var foldermode:FolderMode="normal";
+
+  if (!props.item.items)
+  {
+    foldermode="disabled";
+  }
 
   const topCx:Mapping={
     normal:foldermode=="normal",
-    recent:foldermode=="recent",
+    // recent:foldermode=="recent",
     disabled:foldermode=="disabled"
   };
 
@@ -48,15 +64,15 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
 
   // determine various labels classes
   const dirsCx:Mapping={
-    disabled:!props.dirs
+    disabled:!props.item.dirs
   };
 
   const itemCountLabelCx:Mapping={
-    disabled:!props.items
+    disabled:!props.item.items
   };
 
   const folderTitleCx:Mapping={
-    disabled:!props.dirs
+    disabled:!props.item.dirs
   };
 
   return <div className={cx("folder-item",topCx)}>
@@ -64,10 +80,10 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
       <div className="folder-icon"></div>
     </div>
     <div className="label" onClick={h_click}>
-      <h2 title={props.name} className={cx(folderTitleCx)}>{props.name}</h2>
+      <h2 title={props.item.title} className={cx(folderTitleCx)}>{props.item.title}</h2>
       <p>
-        <span className={cx(dirsCx)}>{props.dirs} dirs,</span>
-        &nbsp;<span className={cx(itemCountLabelCx)}>{props.items} items</span>
+        <span className={cx(dirsCx)}>{props.item.dirs} dirs,</span>
+        &nbsp;<span className={cx(itemCountLabelCx)}>{props.item.items} items</span>
       </p>
     </div>
   </div>;
