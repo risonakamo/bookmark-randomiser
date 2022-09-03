@@ -17,15 +17,47 @@ export default function ComponentTestIndex():JSX.Element
     "folder3"
   ];
 
+  const exampleBookmarkItems:BookmarkItem[]=[
+    {
+      title:"folder 1",
+      id:"a",
+      dirs:2,
+      items:120
+    },
+    {
+      title:"folder 2",
+      id:"a",
+      items:12,
+      dirs:4
+    },
+    {
+      title:"folder that has really long name that has to be longer than this",
+      id:"a",
+      items:2,
+      dirs:60
+    },
+    {
+      title:"recent folder",
+      id:"a",
+      items:12,
+      dirs:0
+    },
+    {
+      title:"disabled folder",
+      id:"a",
+      items:0,
+      dirs:0
+    },
+  ];
+
   return <>
     <h1>folder items</h1>
     <div className="folder-items">
-      <FolderItem name="folder 1" items={120} id={"a"} dirs={0}/>
-      <FolderItem name="folder 2" items={12} id={"a"}  dirs={0}/>
-      <FolderItem name="folder that has really long name that has to be longer than this"
-        items={2} id={"a"}  dirs={0}/>
-      <FolderItem name="recent folder" items={12} mode="recent" id={"a"}  dirs={0}/>
-      <FolderItem name="disabled folder" items={0} mode="disabled" id={"a"}  dirs={0}/>
+      <FolderItem item={exampleBookmarkItems[0]}/>
+      <FolderItem item={exampleBookmarkItems[1]}/>
+      <FolderItem item={exampleBookmarkItems[2]}/>
+      <FolderItem item={exampleBookmarkItems[3]} recent={true}/>
+      <FolderItem item={exampleBookmarkItems[4]}/>
     </div>
 
     <h1>big button</h1>

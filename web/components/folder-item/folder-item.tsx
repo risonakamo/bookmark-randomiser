@@ -7,6 +7,7 @@ export type FolderMode="normal"|"recent"|"disabled"
 interface FolderItemProps
 {
   item:BookmarkItem
+  recent?:boolean
 
   onClick?(title:string):void
   onIconClick?(id:string):void
@@ -49,9 +50,14 @@ export default function FolderItem(props:FolderItemProps):JSX.Element
     foldermode="disabled";
   }
 
+  if (props.recent)
+  {
+    foldermode="recent";
+  }
+
   const topCx:Mapping={
     normal:foldermode=="normal",
-    // recent:foldermode=="recent",
+    recent:foldermode=="recent",
     disabled:foldermode=="disabled"
   };
 
