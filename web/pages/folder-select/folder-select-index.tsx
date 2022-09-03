@@ -13,10 +13,12 @@ import "./folder-select-index.less";
 function FolderSelectMain():JSX.Element
 {
   // STATES
+  // the current bookmark path
   const [currentPath,setCurrentPath]=useImmer<BookmarkPath>([]);
 
 
   // DERIVED STATES
+  // the bookmark items being displayed
   const [bookmarkItems,setBookmarkItems]=useImmer<BookmarkItem[]>([]);
 
 
@@ -38,6 +40,14 @@ function FolderSelectMain():JSX.Element
     });
   }
 
+  /** clicked back button. move backwards from the current path */
+  function h_backbutton():void
+  {
+    setCurrentPath((draft:BookmarkPath)=>{
+      draft.pop();
+    });
+  }
+
 
   // RENDER
   /** render folder items */
@@ -49,7 +59,7 @@ function FolderSelectMain():JSX.Element
   }
 
   return <>
-    <div className="back-button">
+    <div className="back-button" onClick={h_backbutton}>
       <img src="/build/imgs/big-back-button.png"/>
     </div>
     <div className="folder-zone">
