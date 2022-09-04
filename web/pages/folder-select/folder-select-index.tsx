@@ -48,6 +48,12 @@ function FolderSelectMain():JSX.Element
     });
   }
 
+  /** clicked on a toast item. force path to be the clicked on item */
+  function h_toastItemClick(newpath:BookmarkPath):void
+  {
+    setCurrentPath(newpath);
+  }
+
 
   // RENDER
   /** render folder items */
@@ -67,7 +73,7 @@ function FolderSelectMain():JSX.Element
         <h1>FOLDER SELECT</h1>
       </div>
       <div className="toast-zone">
-        <ToastBar/>
+        <ToastBar path={currentPath} onItemClick={h_toastItemClick}/>
       </div>
       <div className="item-zone">
         {render_folderItems()}
