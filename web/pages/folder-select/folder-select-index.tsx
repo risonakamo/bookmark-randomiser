@@ -54,13 +54,20 @@ function FolderSelectMain():JSX.Element
     setCurrentPath(newpath);
   }
 
+  /** clicked on folder item's icon. navigate to bookmark generation page with the provided id */
+  function h_folderItemIconClick(id:string):void
+  {
+    console.log("icon click",id);
+  }
+
 
   // RENDER
   /** render folder items */
   function render_folderItems():JSX.Element[]
   {
     return _.map(bookmarkItems,(item:BookmarkItem):JSX.Element=>{
-      return <FolderItem item={item} key={item.id} onClick={h_folderItemClicked}/>
+      return <FolderItem item={item} key={item.id} onClick={h_folderItemClicked}
+        onIconClick={h_folderItemIconClick}/>
     });
   }
 

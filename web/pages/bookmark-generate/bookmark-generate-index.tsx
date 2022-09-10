@@ -1,4 +1,7 @@
 import {createRoot} from "react-dom/client";
+import {useEffect} from "react";
+
+import {bookmarklibtest2} from "lib/bookmark";
 
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
@@ -39,6 +42,7 @@ export default function BookmarkGenerateIndex():JSX.Element
 function main()
 {
   createRoot(document.querySelector(".main")!).render(<BookmarkGenerateIndex/>);
+  bookmarklibtest2();
 }
 
 window.onload=main;

@@ -2,29 +2,69 @@ import _ from "lodash";
 
 /** given a path, get all the bookmark items that are in that path. bookmark items include all folders
  *  immediately under the target path */
- export async function getChildItems(path:BookmarkPath):Promise<BookmarkItem[]|null>
- {
-     const bookmarknode:BookmarkTreeNode|null=await getBookmarkNodeWithPath(path);
+export async function getChildItems(path:BookmarkPath):Promise<BookmarkItem[]|null>
+{
+    const bookmarknode:BookmarkTreeNode|null=await getBookmarkNodeWithPath(path);
 
-     if (!bookmarknode)
-     {
-         console.error("failed to convert bookmark node to path");
-         return null;
-     }
+    if (!bookmarknode)
+    {
+        console.error("failed to convert bookmark node to path");
+        return null;
+    }
 
-     if (!bookmarknode.children)
-     {
-        console.warn("target node had no children");
+    if (!bookmarknode.children)
+    {
+    console.warn("target node had no children");
+    return [];
+    }
+
+    return _(bookmarknode.children)
+    .filter((childNode:BookmarkTreeNode):boolean=>{
+        return "children" in childNode;
+    })
+    .map(bookmarkNodeToItem)
+    .value();
+}
+
+/** retrieve all real bookmark items from a target id, which should be a folder */
+async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]>
+{
+    const bookmarknode:BookmarkTreeNode=(await chrome.bookmarks.getSubTree(id))[0];
+
+    if (bookmarknode.children==undefined)
+    {
+        console.warn(
+            "target bookmark node had no children, is probably not a folder\n",
+            "can only call on a folder"
+        );
         return [];
-     }
+    }
 
-     return _(bookmarknode.children)
-     .filter((childNode:BookmarkTreeNode):boolean=>{
-         return "children" in childNode;
-     })
-     .map(bookmarkNodeToItem)
-     .value();
- }
+    return _(bookmarknode.children)
+    // filter to only items that have urls, which are real bookmarks
+    .filter((item:BookmarkTreeNode):boolean=>{
+        return !!item.url;
+    })
+    .map((item:BookmarkTreeNode):RealBookmarkItem=>{
+        if (!item.url)
+        {
+            console.warn("encountered bookmark tree node without url after filter\n",item,
+                "\nreturning error item");
+            return {
+                title:"ERROR",
+                url:"ERROR",
+                id:"ERROR"
+            };
+        }
+
+        return {
+            title:item.title,
+            url:item.url || "ERROR",
+            id:item.id
+        };
+    })
+    .value();
+}
 
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
@@ -153,4 +193,9 @@ export async function bookmarklibtest():Promise<void>
 
     console.log(a);
     console.log(b);
+}
+
+export async function bookmarklibtest2():Promise<void>
+{
+    console.log(await getRealBookmarkItems("4093"));
 }

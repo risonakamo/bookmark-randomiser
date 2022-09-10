@@ -12,3 +12,11 @@ interface BookmarkItem
     // number of real bookmarks in this bookmark item
     items:number
 }
+
+/** abstracted actual bookmark item. represents a bookmark itself that is NOT a folder */
+interface RealBookmarkItem
+{
+    title:string
+    id:string
+    url:string
+}
