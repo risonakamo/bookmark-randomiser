@@ -4,6 +4,7 @@ import {useImmer} from "use-immer";
 import _ from "lodash";
 
 import {getRealBookmarkItems} from "lib/bookmark";
+import {randomPull} from "lib/random-gen";
 
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
@@ -17,15 +18,22 @@ import "./bookmark-generate-index.less";
 export default function BookmarkGenerateIndex():JSX.Element
 {
   // STATES
-  // the current bookmarks being displayed
-  const [bookmarks,setBookmarks]=useImmer<RealBookmarkItem[]>([]);
+  // all the available bookmarks to randomise from
+  const [availableBookmarks,setAvailableBookmarks]=useImmer<RealBookmarkItem[]>([]);
+
+  // the bookmarks currently being displayed
+  const [displayedBookmarks,setDisplayedBookmarks]=useImmer<RealBookmarkItem[]>([]);
 
 
   // EFFECTS
-  // retrieve and set bookmark items from query url
+  // retrieve available bookmarks from target query url. perform initial random pull
   useEffect(()=>{
     (async ()=>{
-      setBookmarks(await getRealBookmarkItems("4093"));
+      const availBookmarks:RealBookmarkItem[]=await getRealBookmarkItems("11617");
+      const pullResult:RandomGenResult<RealBookmarkItem>=randomPull<RealBookmarkItem>(availBookmarks,10);
+
+      setAvailableBookmarks(pullResult.modifiedSource);
+      setDisplayedBookmarks(pullResult.pullResult);
     })();
   },[]);
 
@@ -33,7 +41,7 @@ export default function BookmarkGenerateIndex():JSX.Element
   // RENDER
   function render_bookmarkitems():JSX.Element[]
   {
-    return _.map(bookmarks,(bookmark:RealBookmarkItem,i:number):JSX.Element=>{
+    return _.map(displayedBookmarks,(bookmark:RealBookmarkItem,i:number):JSX.Element=>{
       return <BookmarkItem bookmark={bookmark} key={bookmark.id} index={i+1}/>;
     });
   }
