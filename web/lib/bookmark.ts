@@ -27,7 +27,7 @@ export async function getChildItems(path:BookmarkPath):Promise<BookmarkItem[]|nu
 }
 
 /** retrieve all real bookmark items from a target id, which should be a folder */
-async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]>
+export async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]>
 {
     const bookmarknode:BookmarkTreeNode=(await chrome.bookmarks.getSubTree(id))[0];
 

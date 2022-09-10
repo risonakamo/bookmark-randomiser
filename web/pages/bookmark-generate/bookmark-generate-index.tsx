@@ -1,7 +1,9 @@
 import {createRoot} from "react-dom/client";
 import {useEffect} from "react";
+import {useImmer} from "use-immer";
+import _ from "lodash";
 
-import {bookmarklibtest2} from "lib/bookmark";
+import {getRealBookmarkItems} from "lib/bookmark";
 
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
@@ -14,6 +16,28 @@ import "./bookmark-generate-index.less";
 
 export default function BookmarkGenerateIndex():JSX.Element
 {
+  // STATES
+  // the current bookmarks being displayed
+  const [bookmarks,setBookmarks]=useImmer<RealBookmarkItem[]>([]);
+
+
+  // EFFECTS
+  // retrieve and set bookmark items from query url
+  useEffect(()=>{
+    (async ()=>{
+      setBookmarks(await getRealBookmarkItems("4093"));
+    })();
+  },[]);
+
+
+  // RENDER
+  function render_bookmarkitems():JSX.Element[]
+  {
+    return _.map(bookmarks,(bookmark:RealBookmarkItem,i:number):JSX.Element=>{
+      return <BookmarkItem bookmark={bookmark} key={bookmark.id} index={i+1}/>;
+    });
+  }
+
   const testpath:string[]=[
     "folder1",
     "asdads",
@@ -31,10 +55,7 @@ export default function BookmarkGenerateIndex():JSX.Element
       <FatButton text="OPEN"/>
     </div>
     <div className="items-zone">
-      <BookmarkItem/>
-      <BookmarkItem starred={true}/>
-      <BookmarkItem opened={true}/>
-      <BookmarkItem opened={true} starred={true}/>
+      {render_bookmarkitems()}
     </div>
   </>;
 }
@@ -42,7 +63,6 @@ export default function BookmarkGenerateIndex():JSX.Element
 function main()
 {
   createRoot(document.querySelector(".main")!).render(<BookmarkGenerateIndex/>);
-  bookmarklibtest2();
 }
 
 window.onload=main;
