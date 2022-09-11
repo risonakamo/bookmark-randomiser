@@ -7,10 +7,24 @@ import FatButton,{ButtonMode} from "components/fat-button/fat-button";
 interface GenerateButtonProps
 {
   itemCount:number
+  onClick?():void
 }
 
 export default function GenerateButton(props:GenerateButtonProps):JSX.Element
 {
+  // HANDLERS
+  /** clicked this button. do nothing if 0 item count */
+  function h_click():void
+  {
+    if (!props.itemCount)
+    {
+      return;
+    }
+
+    props.onClick?.();
+  }
+
+  // RENDER
   // compute button mode
   var buttonMode:ButtonMode="normal";
   if (!props.itemCount)
@@ -30,7 +44,7 @@ export default function GenerateButton(props:GenerateButtonProps):JSX.Element
     disabled:buttonMode=="disabled"
   };
 
-  return <div className="generate-button">
+  return <div className="generate-button" onClick={h_click}>
     <FatButton text={buttonText} mode={buttonMode} className="inner-button"/>
     <p className="items-count">
       <span className={cx("item-number",itemNumberCx)}>{props.itemCount}</span>

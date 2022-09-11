@@ -16,6 +16,8 @@ import BookmarkItem from "components/bookmark-item/bookmark-item";
 
 import "./bookmark-generate-index.less";
 
+const DEFAULT_GEN_AMOUNT:number=10;
+
 export default function BookmarkGenerateIndex():JSX.Element
 {
   // STATES
@@ -29,7 +31,7 @@ export default function BookmarkGenerateIndex():JSX.Element
   const [generateIndex,setGenerateIndex]=useImmer<number>(1);
 
   // generate amount
-  const [generateAmount,setGenerateAmount]=useImmer<number>(10);
+  const [generateAmount,setGenerateAmount]=useImmer<number>(DEFAULT_GEN_AMOUNT);
 
 
   // EFFECTS
@@ -45,7 +47,9 @@ export default function BookmarkGenerateIndex():JSX.Element
       }
 
       const availBookmarks:RealBookmarkItem[]=await getRealBookmarkItems(targetFolder);
-      const pullResult:RandomGenResult<RealBookmarkItem>=randomPull<RealBookmarkItem>(availBookmarks,10);
+      const pullResult:RandomGenResult<RealBookmarkItem>=randomPull<RealBookmarkItem>(
+        availBookmarks,DEFAULT_GEN_AMOUNT
+      );
 
       setAvailableBookmarks(pullResult.modifiedSource);
       setDisplayedBookmarks(pullResult.pullResult);
@@ -53,18 +57,25 @@ export default function BookmarkGenerateIndex():JSX.Element
   },[]);
 
 
-  // FUNCTIONS
-  function generateItems():void
-  {
-
-  }
-
-
   // HANDLERS
   /** handle amount selector change */
   function h_genamountchange(value:number):void
   {
     setGenerateAmount(value);
+  }
+
+  /** clicked generate button. pull from the available bookmarks, set the newly generated bookmarks,
+   *  and update the gen index
+   */
+  function h_generateButtonClick():void
+  {
+    const pullResult:RandomGenResult<RealBookmarkItem>=randomPull<RealBookmarkItem>(
+      availableBookmarks,generateAmount
+    );
+
+    setAvailableBookmarks(pullResult.modifiedSource);
+    setDisplayedBookmarks(pullResult.pullResult);
+    setGenerateIndex(generateIndex+generateAmount);
   }
 
 
@@ -89,7 +100,7 @@ export default function BookmarkGenerateIndex():JSX.Element
       <AmountSelector amount={generateAmount} onChange={h_genamountchange}/>
     </div>
     <div className="control-buttons">
-      <GenerateButton itemCount={availableBookmarks.length}/>
+      <GenerateButton itemCount={availableBookmarks.length} onClick={h_generateButtonClick}/>
       <FatButton text="OPEN"/>
     </div>
     <div className="items-zone">
