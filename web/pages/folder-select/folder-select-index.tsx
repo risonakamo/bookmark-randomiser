@@ -57,7 +57,7 @@ function FolderSelectMain():JSX.Element
   /** clicked on folder item's icon. navigate to bookmark generation page with the provided id */
   function h_folderItemIconClick(id:string):void
   {
-    console.log("icon click",id);
+    window.location.href=`../bookmark-generate/index.html?folderid=${id}`;
   }
 
 

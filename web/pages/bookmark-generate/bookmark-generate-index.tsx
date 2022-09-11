@@ -5,6 +5,7 @@ import _ from "lodash";
 
 import {getRealBookmarkItems} from "lib/bookmark";
 import {randomPull} from "lib/random-gen";
+import {getTargetFolderId} from "apis/url-query";
 
 import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
@@ -29,7 +30,15 @@ export default function BookmarkGenerateIndex():JSX.Element
   // retrieve available bookmarks from target query url. perform initial random pull
   useEffect(()=>{
     (async ()=>{
-      const availBookmarks:RealBookmarkItem[]=await getRealBookmarkItems("11617");
+      const targetFolder:string|null=getTargetFolderId();
+
+      if (!targetFolder)
+      {
+        console.error("failed to get target folder id from url params");
+        return;
+      }
+
+      const availBookmarks:RealBookmarkItem[]=await getRealBookmarkItems(targetFolder);
       const pullResult:RandomGenResult<RealBookmarkItem>=randomPull<RealBookmarkItem>(availBookmarks,10);
 
       setAvailableBookmarks(pullResult.modifiedSource);

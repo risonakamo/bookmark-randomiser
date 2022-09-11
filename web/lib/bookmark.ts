@@ -35,7 +35,9 @@ export async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]
     {
         console.warn(
             "target bookmark node had no children, is probably not a folder\n",
-            "can only call on a folder"
+            "can only call on a folder\n",
+            "target id:",id,"\n",
+            "node:",bookmarknode
         );
         return [];
     }
