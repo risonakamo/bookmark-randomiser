@@ -80,7 +80,7 @@ export default function ComponentTestIndex():JSX.Element
 
     <h1>amount selector</h1>
     <div>
-      <AmountSelector/>
+      <AmountSelector amount={10}/>
     </div>
   </>;
 }

@@ -25,6 +25,12 @@ export default function BookmarkGenerateIndex():JSX.Element
   // the bookmarks currently being displayed
   const [displayedBookmarks,setDisplayedBookmarks]=useImmer<RealBookmarkItem[]>([]);
 
+  // number used to determine index numbers next to displayed bookmark items
+  const [generateIndex,setGenerateIndex]=useImmer<number>(1);
+
+  // generate amount
+  const [generateAmount,setGenerateAmount]=useImmer<number>(10);
+
 
   // EFFECTS
   // retrieve available bookmarks from target query url. perform initial random pull
@@ -47,11 +53,26 @@ export default function BookmarkGenerateIndex():JSX.Element
   },[]);
 
 
+  // FUNCTIONS
+  function generateItems():void
+  {
+
+  }
+
+
+  // HANDLERS
+  /** handle amount selector change */
+  function h_genamountchange(value:number):void
+  {
+    setGenerateAmount(value);
+  }
+
+
   // RENDER
   function render_bookmarkitems():JSX.Element[]
   {
     return _.map(displayedBookmarks,(bookmark:RealBookmarkItem,i:number):JSX.Element=>{
-      return <BookmarkItem bookmark={bookmark} key={bookmark.id} index={i+1}/>;
+      return <BookmarkItem bookmark={bookmark} key={bookmark.id} index={generateIndex+i}/>;
     });
   }
 
@@ -65,10 +86,10 @@ export default function BookmarkGenerateIndex():JSX.Element
     <div className="control-header">
       <FolderBackButton/>
       <StaticToastBar path={testpath}/>
-      <AmountSelector/>
+      <AmountSelector amount={generateAmount} onChange={h_genamountchange}/>
     </div>
     <div className="control-buttons">
-      <GenerateButton itemCount={52}/>
+      <GenerateButton itemCount={availableBookmarks.length}/>
       <FatButton text="OPEN"/>
     </div>
     <div className="items-zone">
