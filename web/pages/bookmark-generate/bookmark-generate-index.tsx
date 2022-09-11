@@ -1,5 +1,5 @@
 import {createRoot} from "react-dom/client";
-import {useEffect} from "react";
+import {useEffect,useMemo} from "react";
 import {useImmer} from "use-immer";
 import _ from "lodash";
 
@@ -11,7 +11,7 @@ import FolderBackButton from "components/folder-back-button/folder-back-button";
 import StaticToastBar from "components/static-toast-bar/static-toast-bar";
 import AmountSelector from "components/amount-selector/amount-selector";
 import GenerateButton from "components/generate-button/generate-button";
-import FatButton from "components/fat-button/fat-button";
+import FatButton,{ButtonMode} from "components/fat-button/fat-button";
 import BookmarkItem from "components/bookmark-item/bookmark-item";
 
 import "./bookmark-generate-index.less";
@@ -37,6 +37,15 @@ export default function BookmarkGenerateIndex():JSX.Element
 
   // generate amount
   const [generateAmount,setGenerateAmount]=useImmer<number>(DEFAULT_GEN_AMOUNT);
+
+
+  // DERIVED STATES
+  // true if all items are opened
+  const allOpened:boolean=useMemo(()=>{
+    return _.every(displayedBookmarks,(item:RealBookmarkItem2):boolean=>{
+      return item.opened;
+    });
+  },[displayedBookmarks]);
 
 
   // EFFECTS
@@ -86,6 +95,17 @@ export default function BookmarkGenerateIndex():JSX.Element
     });
   }
 
+  /** mark all displayed bookmark items as opened */
+  function markAllOpened():void
+  {
+    setDisplayedBookmarks(_.map(displayedBookmarks,(item:RealBookmarkItem2):RealBookmarkItem2=>{
+      return {
+        ...item,
+        opened:true
+      };
+    }));
+  }
+
 
   // HANDLERS
   /** handle amount selector change */
@@ -95,8 +115,7 @@ export default function BookmarkGenerateIndex():JSX.Element
   }
 
   /** clicked generate button. pull from the available bookmarks, set the newly generated bookmarks,
-   *  and update the gen index
-   */
+   *  and update the gen index */
   function h_generateButtonClick():void
   {
     const pullResult:RandomGenResult<RealBookmarkItem2>=randomPull<RealBookmarkItem2>(
@@ -123,6 +142,22 @@ export default function BookmarkGenerateIndex():JSX.Element
     }
   }
 
+  /** clicked open all button. open all displayed items in new tab then mark all items as displayed */
+  function h_openallClick():void
+  {
+    for (var i=0;i<displayedBookmarks.length;i++)
+    {
+      const item:RealBookmarkItem2=displayedBookmarks[i];
+
+      chrome.tabs.create({
+        url:item.url,
+        active:false
+      });
+    }
+
+    markAllOpened();
+  }
+
 
   // RENDER
   function render_bookmarkitems():JSX.Element[]
@@ -139,6 +174,20 @@ export default function BookmarkGenerateIndex():JSX.Element
     "asdadasdasda"
   ];
 
+  // compute open button values
+  var openButtonMode:ButtonMode="normal";
+  var openButtonText:string="OPEN";
+  var openButtonHoverText:string|undefined=undefined;
+  var openButtonHoverMode:ButtonMode|undefined=undefined;
+
+  if (allOpened)
+  {
+    openButtonMode="opened";
+    openButtonText="OPENED";
+    openButtonHoverText="OPEN AGAIN";
+    openButtonHoverMode="open-again";
+  }
+
   return <>
     <div className="control-header">
       <FolderBackButton/>
@@ -147,17 +196,13 @@ export default function BookmarkGenerateIndex():JSX.Element
     </div>
     <div className="control-buttons">
       <GenerateButton itemCount={availableBookmarks.length} onClick={h_generateButtonClick}/>
-      <FatButton text="OPEN"/>
+      <FatButton text={openButtonText} onClick={h_openallClick} mode={openButtonMode}
+        hoverText={openButtonHoverText} hoverMode={openButtonHoverMode}/>
     </div>
     <div className="items-zone">
       {render_bookmarkitems()}
     </div>
   </>;
-}
-
-function main()
-{
-  createRoot(document.querySelector(".main")!).render(<BookmarkGenerateIndex/>);
 }
 
 /** upgrade real bookmark items array into bookmark items2 */
@@ -169,6 +214,11 @@ function upgradeRealBookmarkItems(items:RealBookmarkItem[]):RealBookmarkItem2[]
       opened:false
     };
   });
+}
+
+function main()
+{
+  createRoot(document.querySelector(".main")!).render(<BookmarkGenerateIndex/>);
 }
 
 window.onload=main;

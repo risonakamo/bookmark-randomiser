@@ -14,6 +14,7 @@ interface FatButtonProps
   hoverMode?:ButtonMode
 
   className?:string
+  onClick?():void
 }
 
 export default function FatButton(props:FatButtonProps):JSX.Element
@@ -67,7 +68,7 @@ export default function FatButton(props:FatButtonProps):JSX.Element
 
 
   return <div className={cx("fat-button",topCx,props.className)} onMouseEnter={h_hover}
-    onMouseLeave={h_unhover}
+    onMouseLeave={h_unhover} onClick={props.onClick}
   >
     <img src="/build/imgs/opened-check.png" className="check-icon"/>
     <h2>{text}</h2>
