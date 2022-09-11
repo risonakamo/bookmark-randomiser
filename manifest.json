@@ -6,7 +6,8 @@
 
     "permissions":[
         "favicon",
-        "bookmarks"
+        "bookmarks",
+        "tabs"
     ],
 
     "action":{

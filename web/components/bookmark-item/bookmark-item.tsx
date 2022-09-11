@@ -11,10 +11,21 @@ interface BookmarkItemProps
 
   opened?:boolean
   starred?:boolean
+
+  onClick?(item:RealBookmarkItem,opened:boolean):void
 }
 
 export default function BookmarkItem(props:BookmarkItemProps):JSX.Element
 {
+  // HANDLERS
+  /** clicked this item. return the bookmark data of this item, and if it was opened or not */
+  function h_click():void
+  {
+    props.onClick?.(props.bookmark,!!props.opened);
+  }
+
+
+  // RENDER
   const topCx:Mapping={
     opened:props.opened
   };
@@ -25,7 +36,7 @@ export default function BookmarkItem(props:BookmarkItemProps):JSX.Element
 
   const iconUrl:string=getFaviconUrl(props.bookmark.url);
 
-  return <div className={cx("bookmark-item",topCx)}>
+  return <div className={cx("bookmark-item",topCx)} onClick={h_click}>
     <div className="gen-number">
       {props.index}
     </div>
