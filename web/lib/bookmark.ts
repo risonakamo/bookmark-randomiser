@@ -68,6 +68,26 @@ export async function getRealBookmarkItems(id:string):Promise<RealBookmarkItem[]
     .value();
 }
 
+/** convert bookmark id to bookmark path */
+export async function bookmarkIdToPath(id:string):Promise<BookmarkPath>
+{
+    var currentId:string=id;
+    const path:BookmarkPath=[];
+
+    while (true)
+    {
+        if (currentId=="0")
+        {
+            return _.reverse(path).slice(1);
+        }
+
+        const gotNode:BookmarkTreeNode=(await chrome.bookmarks.get(currentId))[0];
+
+        path.push(gotNode.title);
+        currentId=gotNode.parentId || "0";
+    }
+}
+
 /** get bookmark item at requested path */
 async function getBookmarkItemWithPath(path:BookmarkPath):Promise<BookmarkItem>
 {
@@ -200,4 +220,9 @@ export async function bookmarklibtest():Promise<void>
 export async function bookmarklibtest2():Promise<void>
 {
     console.log(await getRealBookmarkItems("4093"));
+}
+
+export async function bookmarklibtest3():Promise<void>
+{
+    console.log(await bookmarkIdToPath("4406"));
 }

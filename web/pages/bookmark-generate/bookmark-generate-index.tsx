@@ -3,7 +3,7 @@ import {useEffect,useMemo} from "react";
 import {useImmer} from "use-immer";
 import _ from "lodash";
 
-import {getRealBookmarkItems} from "lib/bookmark";
+import {getRealBookmarkItems,bookmarkIdToPath} from "lib/bookmark";
 import {randomPull} from "lib/random-gen";
 import {getTargetFolderId} from "apis/url-query";
 
@@ -38,6 +38,9 @@ export default function BookmarkGenerateIndex():JSX.Element
   // generate amount
   const [generateAmount,setGenerateAmount]=useImmer<number>(DEFAULT_GEN_AMOUNT);
 
+  // bookmark path
+  const [currentPath,setCurrentPath]=useImmer<BookmarkPath>([]);
+
 
   // DERIVED STATES
   // true if all items are opened
@@ -49,7 +52,8 @@ export default function BookmarkGenerateIndex():JSX.Element
 
 
   // EFFECTS
-  // retrieve available bookmarks from target query url. perform initial random pull
+  // retrieve available bookmarks from target query url. perform initial random pull. also retrieve the
+  // current bookmark path from the id input
   useEffect(()=>{
     (async ()=>{
       const targetFolder:string|null=getTargetFolderId();
@@ -68,6 +72,7 @@ export default function BookmarkGenerateIndex():JSX.Element
         availBookmarks,DEFAULT_GEN_AMOUNT
       );
 
+      setCurrentPath(await bookmarkIdToPath(targetFolder));
       setAvailableBookmarks(pullResult.modifiedSource);
       setDisplayedBookmarks(pullResult.pullResult);
     })();
@@ -168,12 +173,6 @@ export default function BookmarkGenerateIndex():JSX.Element
     });
   }
 
-  const testpath:string[]=[
-    "folder1",
-    "asdads",
-    "asdadasdasda"
-  ];
-
   // compute open button values
   var openButtonMode:ButtonMode="normal";
   var openButtonText:string="OPEN";
@@ -191,7 +190,7 @@ export default function BookmarkGenerateIndex():JSX.Element
   return <>
     <div className="control-header">
       <FolderBackButton/>
-      <StaticToastBar path={testpath}/>
+      <StaticToastBar path={currentPath}/>
       <AmountSelector amount={generateAmount} onChange={h_genamountchange}/>
     </div>
     <div className="control-buttons">
