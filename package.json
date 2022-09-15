@@ -1,6 +1,6 @@
 {
   "name": "bookmark-randomiser",
-  "version": "0.0.0",
+  "version": "0.0.1-beta",
   "scripts": {
     "watch": "vite build",
     "build": "vite build -w false"

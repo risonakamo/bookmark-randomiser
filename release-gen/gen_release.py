@@ -7,7 +7,7 @@ from shutil import rmtree,copy,copytree
 from typing import List
 
 # confirguration
-version:str="1.0.0-beta"
+version:str="0.0.1-beta"
 skipBuild:bool=False
 
 if __name__=="__main__":

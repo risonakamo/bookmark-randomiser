@@ -1,7 +1,9 @@
 {
     "name":"Bookmark Randomiser",
     "description":"Randomise bookmarks in folders",
-    "version":"1.0.0",
+    "version":"0.0.1",
+    "version_name":"0.0.1-beta",
+    "homepage_url":"https://github.com/risonakamo/bookmark-randomiser",
     "manifest_version":3,
 
     "permissions":[
